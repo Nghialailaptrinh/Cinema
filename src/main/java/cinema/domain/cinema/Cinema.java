@@ -1,19 +1,31 @@
 package cinema.domain.cinema;
 
 import cinema.domain.common.BaseEntity;
-import cinema.domain.common.Money;
-import java.time.Instant;
-import java.util.List;
+import cinema.domain.common.DomainException;
 
-/** Domain state skeleton; invariants and transitions are intentionally pending. */
 public final class Cinema extends BaseEntity {
+
     private final String name;
     private final String address;
+
     public Cinema(String id, String name, String address) {
         super(id);
-        this.name = name;
-        this.address = address;
+        this.name = requireText(name, "Cinema name");
+        this.address = requireText(address, "Cinema address");
     }
-    public String getName() { return name; }
-    public String getAddress() { return address; }
+
+    private static String requireText(String value, String field) {
+        if (value == null || value.isBlank()) {
+            throw new DomainException(field + " must not be blank");
+        }
+        return value.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 }

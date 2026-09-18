@@ -18,7 +18,7 @@ Kế hoạch chi tiết: [Cinema V1](cinema-v1-plan.md). Tài liệu này ghi nh
 Kế hoạch gồm **13 milestone**, từ M0 đến M12.
 
 - [x] **M0 — Architecture foundation:** hoàn thiện thành phần chung và port; 13 DomainRulesTest và 6 architecture tests đạt, không bỏ qua.
-- [ ] **M1 — Cinema / Hall / Seat:** tạo và truy vấn dữ liệu rạp, phòng, ghế; kiểm tra luật và tính duy nhất của ghế trong phòng.
+- [x] **M1 — Cinema / Hall / Seat:** tạo và truy vấn dữ liệu rạp, phòng, ghế; kiểm tra luật và tính duy nhất của ghế trong phòng.
 - [ ] **M2 — Movie:** tạo, xóa và truy vấn phim; kiểm tra tiêu đề và thời lượng.
 - [ ] **M3 — Screening:** tạo và truy vấn suất chiếu; kiểm tra lịch trùng trong cùng phòng và trạng thái cho phép đặt vé.
 - [ ] **M4 — Identity + Customer:** đăng ký, đăng nhập đơn giản; nối ApplicationUser với Customer qua IdentityService và CurrentUser.
@@ -33,19 +33,20 @@ Kế hoạch gồm **13 milestone**, từ M0 đến M12.
 
 ## Bước tiếp theo
 
-M1 đang triển khai phần Web độc lập trên nhánh feature/nghia/moc-5-web-integration.
-Quy tắc đã chốt; bước tiếp theo là nhận PR hợp đồng/handler của Bảo Long và
-adapter in-memory của Duy Khánh để nối controller, cấu hình và kiểm thử toàn luồng.
+M1 đã hoàn tất phần Cinema/Hall/Seat trên profile `venue-dev`. Dữ liệu dùng
+repository in-memory và mất khi restart; JPA, sửa/xóa và các nghiệp vụ Screening
+trở đi chưa thuộc mốc này.
 
 ## Tiến độ M1 — 2026-09-18
 
-- Đã thêm ba request DTO, response ID, profile security venue-dev và lỗi JSON 400.
-- 40 trường hợp kiểm thử Web/security mới đạt; gồm test ứng dụng thật với profile
-  venue-dev và test riêng có controller thử nghiệm để kiểm tra JSON/security.
-- Toàn bộ verify: 61 đạt, 8 workflow skeleton ngoài M1 skipped, không lỗi.
-- Chưa có controller nghiệp vụ, VenueConfiguration hoặc mapping lỗi 409;
-  chờ lớp Application và adapter đúng phân công.
-- Chưa nghiệm thu M1, chưa ghép main hoặc chuyển mốc 6.
+- Đã hoàn thiện domain invariant, port, command/query handler và DTO cho Cinema/Hall/Seat.
+- Đã thêm ba adapter in-memory thread-safe, cấu hình `venue-dev`, ba controller,
+  mapping lỗi 409 và demo HTTP.
+- `VenueApiIntegrationTest` kiểm tra create/read hierarchy, 400/404/409 và route
+  ngoài M1; dữ liệu test dùng ID sinh thật.
+- `clean verify` đạt; test workflow skeleton ngoài M1 vẫn skipped và không tính
+  là tiêu chí M1.
+- M1 được nghiệm thu; M2 là bước tiếp theo.
 
 ## Hoàn thành M0 — 2026-09-17
 

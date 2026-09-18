@@ -20,9 +20,9 @@ flowchart LR
 
 ## Chạy và kiểm tra
 
-Đặc tả bước tiếp theo: [M1 — Cinema / Hall / Seat](docs/m1-specification.md),
-kèm bốn bản giao việc theo thành viên. M1 đang triển khai phần Web độc lập,
-chưa hoàn thành luồng tạo rạp/phòng/ghế.
+Đặc tả M1: [M1 — Cinema / Hall / Seat](docs/m1-specification.md),
+kèm bốn bản giao việc theo thành viên. M1 đã có luồng tạo và truy vấn
+rạp/phòng/ghế qua Application và HTTP.
 
 Dùng JDK 25. Dự án đã có Maven Wrapper:
 
@@ -35,13 +35,13 @@ Nếu Maven trỏ cache vào `C:\.m2` và không ghi được, truyền `-Dmaven
 
 ## Trạng thái triển khai
 
-Ứng dụng khởi động được mà chưa cần database, Redis hay RabbitMQ. Controller chưa có endpoint nghiệp vụ; profile mặc định vẫn chặn toàn bộ request. JWT filter chưa đăng ký, chưa có tài khoản mặc định hay thanh toán hoạt động.
+Ứng dụng khởi động được mà chưa cần database, Redis hay RabbitMQ. Profile mặc định vẫn chặn toàn bộ request; JWT filter chưa đăng ký, chưa có tài khoản mặc định hay thanh toán hoạt động.
 
-Phần Web M1 đã có request/response, xử lý JSON lỗi và security profile `venue-dev`.
-Profile này chỉ cho phép method/path được định nghĩa trong đặc tả M1; chưa có
-controller/handler/repository để thực hiện chức năng tạo rạp/phòng/ghế.
-Các request/response được kiểm thử qua controller thử nghiệm trong test,
-không có controller giả trong source ứng dụng.
+M1 có request/response, xử lý JSON lỗi, controller, Application handler và
+repository in-memory. Profile `venue-dev` chỉ cho phép method/path được định
+nghĩa trong đặc tả M1; dữ liệu mất khi ứng dụng khởi động lại.
+
+Ví dụ HTTP đầy đủ nằm tại [docs/m1-venue-demo.http](docs/m1-venue-demo.http).
 
 Chạy cấu hình phát triển M1 khi cần kiểm tra profile:
 
@@ -49,10 +49,10 @@ Chạy cấu hình phát triển M1 khi cần kiểm tra profile:
 .\mvnw.cmd spring-boot:run '-Dspring-boot.run.profiles=venue-dev'
 ```
 
-M1 sẽ dùng lưu trữ in-memory, mất dữ liệu khi khởi động lại.
-Chờ bàn giao Domain/Application và adapter để kiểm thử nghiệp vụ toàn luồng.
+M1 dùng lưu trữ in-memory, mất dữ liệu khi khởi động lại; chưa có JPA migration,
+sửa/xóa địa điểm, tạo ghế hàng loạt, Screening hay phân quyền ADMIN thật.
 
-Handler chưa implement sẽ ném `FeatureNotImplementedException`. Domain method và adapter chưa implement sẽ ném `UnsupportedOperationException`. `BaseEntity` từ chối ID null/blank; `Money` từ chối amount/currency null và số tiền âm. Các invariant nghiệp vụ khác còn phải triển khai theo milestone. JPA entity mới có ID, phần mapping còn phải làm tiếp.
+Các handler của những milestone chưa triển khai vẫn ném `FeatureNotImplementedException`. `BaseEntity` từ chối ID null/blank; `Money` từ chối amount/currency null và số tiền âm. JPA entity mới có ID, phần mapping còn phải làm tiếp.
 
 Test đang chạy kiểm tra luật nền tảng, dependency, khởi động/security và việc handler báo chưa implement. M0 có 13 domain test và 6 architecture test đạt, không bỏ qua. `BookingWorkflowTest` còn 8 test skeleton bị `@Disabled`, thuộc các bước triển khai sau.
 

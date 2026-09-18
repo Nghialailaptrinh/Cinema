@@ -2,7 +2,7 @@
 
 Ngày lập: 2026-09-18. Mốc 5 trong kế hoạch 18 mốc; mã kỹ thuật M1.
 Trạng thái: quy tắc M1 đã được Nguyễn Trung Nghĩa duyệt ngày 2026-09-18;
-đang triển khai phần Web độc lập, chưa hoàn thành M1.
+M1 đã hoàn thành nghiệm thu ngày 2026-09-18.
 
 ## 1. Mục tiêu và hiện trạng
 
@@ -10,12 +10,10 @@ M1 cung cấp dữ liệu rạp → phòng → ghế để Screening sử dụng
 Luồng nghiệm thu: tạo Cinema, tạo Hall thuộc Cinema, tạo Seat thuộc Hall,
 sau đó truy vấn lại qua Application và HTTP.
 
-Code hiện tại đã có Cinema, Hall, Seat, SeatType và kiểm tra ID trong BaseEntity.
-Các entity chưa kiểm tra luật riêng. SeatRepository chỉ có findById/findByHallId.
-Chưa có CinemaRepository, HallRepository hoặc use case quản lý địa điểm.
-JpaSeatRepositoryAdapter còn là skeleton. Profile mặc định vẫn chặn toàn bộ request;
-profile venue-dev đã có allowlist method/path M1, nhưng controller nghiệp vụ và
-cấu hình nối handler/repository chưa được tích hợp.
+Code M1 có Cinema, Hall, Seat, invariant Domain, các port/use case quản lý địa điểm,
+adapter in-memory và controller HTTP. `JpaSeatRepositoryAdapter` vẫn là skeleton
+theo chủ đích. Profile mặc định vẫn chặn toàn bộ request; `venue-dev` mở đúng
+allowlist M1.
 
 M1 dùng repository in-memory. Dữ liệu mất khi khởi động lại.
 Chưa triển khai JPA/migration, sửa/xóa địa điểm, tạo ghế hàng loạt,
@@ -244,8 +242,7 @@ Các handler constructor được thống nhất ở mục 5; test/Web phụ thu
 chỉ hoàn thiện biên dịch khi implementation của Long đã sẵn sàng.
 Không ghép code gọi lớp chưa tồn tại hoặc để main không build được.
 Bước 4: ghép Domain/Application, adapter, test, cuối cùng cấu hình/Web.
-Bước 5: chạy toàn bộ verify, nghiệm thu và cập nhật tiến độ.
+Bước 5: đã chạy toàn bộ verify, nghiệm thu và cập nhật tiến độ ngày 2026-09-18.
 
 Độc lập ở đây là không sở hữu trùng file, không phải không có phụ thuộc.
 Không tạo stub thành công giả hoặc dùng @Disabled để che phần chưa triển khai.
-

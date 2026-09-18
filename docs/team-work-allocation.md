@@ -67,11 +67,11 @@ ngay tại mốc đó; mốc 13 rà soát và hoàn thiện nhất quán toàn h
 Các bản giao việc này quy định file và chữ ký hàm cho M1. Nghĩa đã xác nhận
 các quy tắc mục 3 đặc tả ngày 2026-09-18; triển khai và kiểm thử theo hợp đồng này.
 
-Phụ trách chính: **Bảo Long**. Trạng thái: **Đang triển khai phần Web độc lập của Nghĩa**.
+Phụ trách chính: **Bảo Long**. Trạng thái: **Hoàn thành ngày 2026-09-18**.
 
-Ngày 2026-09-18: request/response, security theo profile và xử lý JSON lỗi đã có
-kiểm thử đạt trên nhánh Nghĩa. Phần nối controller/handler/repository còn chờ
-bàn giao; mốc 5 chưa được nghiệm thu. Chi tiết tại bản giao việc của Nghĩa.
+Ngày 2026-09-18: đã tích hợp domain/application, adapter in-memory, controller,
+security profile, xử lý lỗi và test HTTP toàn luồng. Mốc 5 đạt nghiệm thu bằng
+`clean verify`; chi tiết tại đặc tả và demo HTTP M1.
 
 - **Nghĩa:** Chốt port, cấu hình ghép nối; review và tích hợp.
 - **Bảo Long:** Triển khai Domain, repository port và use case Cinema/Hall/Seat.
