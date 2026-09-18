@@ -32,6 +32,9 @@ public final class CreateSeatCommandHandler implements UseCase<CreateSeatCommand
         if (input.number() == null || input.number() <= 0) {
             throw new ValidationException("Seat number must be positive");
         }
+        if (input.row() == null || input.row().isBlank()) {
+            throw new ValidationException("Seat row must not be blank");
+        }
         SeatType type;
         try {
             type = input.type() == null ? null : SeatType.valueOf(input.type());

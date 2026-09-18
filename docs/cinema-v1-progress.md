@@ -2,7 +2,7 @@
 
 Ngày lưu kế hoạch: 2026-09-17.
 
-Kế hoạch chi tiết: [Cinema V1](cinema-v1-plan.md). Tài liệu này ghi nhận trạng thái milestone, kết quả kiểm thử và công việc còn lại của nhóm.
+Kế hoạch chi tiết: [Cinema V1](cinema-v1-plan.md). Đây là dự án cá nhân; tài liệu ghi nhận trạng thái milestone, kết quả kiểm thử và công việc còn lại.
 
 ## Nguyên tắc thực hiện
 
@@ -39,6 +39,16 @@ trở đi chưa thuộc mốc này.
 
 ## Tiến độ M1 — 2026-09-18
 
+- Đã khép các thiếu sót phát hiện khi rà soát: bổ sung 73 trường hợp kiểm thử
+  cho Application, Domain, hợp đồng repository, ghi đồng thời và HTTP.
+- Sửa CreateSeat để row null/blank trả VALIDATION trước khi tra Hall.
+- Chạy lại build sạch bằng JDK 17: **162 test, 154 đạt, 0 failure, 0 error,
+  8 skipped** thuộc BookingWorkflowTest ngoài M1. Không test M1 nào bị bỏ qua.
+- Hai test cạnh tranh dùng latch và executor có timeout: mỗi cặp yêu cầu
+  trùng tên Hall/vị trí Seat có đúng một thành công, một ConflictException,
+  một bản ghi được lưu.
+- Thay kế hoạch nhóm bốn người bằng quy trình phát triển cá nhân.
+- [Ma trận nghiệm thu M1](m1-acceptance.md) ghi phạm vi kiểm chứng và giới hạn.
 - Đã hoàn thiện domain invariant, port, command/query handler và DTO cho Cinema/Hall/Seat.
 - Đã thêm ba adapter in-memory thread-safe, cấu hình `venue-dev`, ba controller,
   mapping lỗi 409 và demo HTTP.
@@ -94,3 +104,4 @@ Kết quả: 14 test được báo cáo, 0 failure, 0 error, **8 skipped**. `BUI
 | 2026-09-17 | Lưu kế hoạch gốc và tạo checklist M0–M12. | Chỉ cập nhật tài liệu; chưa đánh giá mức hoàn thành implementation. |
 | 2026-09-17 | Kiểm tra M0: chưa hoàn thành. | Architecture: 6 đạt; DomainRulesTest: 8 skipped, thân test rỗng; Money chưa kiểm tra invariant. |
 | 2026-09-17 | Hoàn thiện M0 theo phạm vi được duyệt. | Domain: 13 đạt; architecture: 6 đạt; toàn bộ verify thành công (21 đạt, 8 workflow skipped). |
+| 2026-09-18 | Hoàn thiện nghiệm thu M1 và chuyển tài liệu sang dự án cá nhân. | clean verify: 162 test, 154 đạt, 8 workflow ngoài M1 skipped; 0 failure/error. |

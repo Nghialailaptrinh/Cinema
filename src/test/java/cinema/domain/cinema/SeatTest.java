@@ -37,6 +37,6 @@ class SeatTest {
     void acceptsEachSeatType() {
         for (var type : SeatType.values()) {
             assertEquals(type, new Seat(type.name(), "h1", "A", 1, type).getType());
-    
-        }}
+        }
+    }
 }

@@ -1,8 +1,8 @@
 # Đặc tả M1 — Cinema / Hall / Seat
 
 Ngày lập: 2026-09-18. Mốc 5 trong kế hoạch 18 mốc; mã kỹ thuật M1.
-Trạng thái: quy tắc M1 đã được Nguyễn Trung Nghĩa duyệt ngày 2026-09-18;
-M1 đã hoàn thành nghiệm thu ngày 2026-09-18.
+Đây là dự án cá nhân; triển khai và kiểm chứng theo phạm vi M1 dưới đây.
+Kết quả nghiệm thu hiện tại được ghi tại [tiến độ Cinema V1](cinema-v1-progress.md).
 
 ## 1. Mục tiêu và hiện trạng
 
@@ -42,10 +42,8 @@ Yêu cầu đã có trong kế hoạch:
 
 ## 3. Quy tắc đã duyệt — 2026-09-18
 
-Nguyễn Trung Nghĩa đã xác nhận toàn bộ các quy tắc dưới đây.
-Bốn bản giao việc và các kiểm thử sử dụng thống nhất các quy tắc này.
-Nếu cần thay đổi, trưởng nhóm xác nhận và cập nhật đặc tả cùng test expectation
-trước khi sửa code phụ thuộc.
+Implementation và kiểm thử sử dụng thống nhất các quy tắc dưới đây.
+Khi thay đổi hành vi, cập nhật đặc tả và kiểm thử tương ứng.
 
 - Address: bắt buộc không null/blank; trim khi lưu.
 - Tên Cinema/Hall: trim khi lưu; chưa chuẩn hóa chữ hoa/thường.
@@ -225,24 +223,16 @@ Profile mặc định giữ nguyên hành vi kiểm thử scaffold.
 - HTTP: tạo Cinema → Hall → Seat và đọc lại; 400/404/409; request ngoài M1 bị chặn.
 - Test M0, architecture tests và kiểm thử cũ vẫn đạt.
 - Test bắt buộc M1 không @Disabled, không thân rỗng.
-- Tất cả PR đã ghép main, chạy kiểm thử chung và Nghĩa ký nhận trước mốc 6.
+- Chạy build sạch và toàn bộ kiểm thử, ghi kết quả trước khi chuyển sang M2.
 
-## 9. Bốn bản giao việc và trình tự tích hợp
+## 9. Trình tự triển khai cá nhân
 
-- [Nguyễn Trung Nghĩa — Web, cấu hình và tích hợp](m1-nguyen-trung-nghia.md).
-- [Bảo Long — Domain và Application](m1-bao-long.md).
-- [Duy Anh — kiểm thử Domain/Application](m1-duy-anh.md).
-- [Duy Khánh — adapter in-memory và test persistence tạm](m1-duy-khanh.md).
+1. Xác định quy tắc, port, command/query và DTO theo đặc tả.
+2. Hoàn thiện Domain và Application, sau đó adapter in-memory và cấu hình/Web.
+3. Kiểm thử dữ liệu sai, ánh xạ lỗi, truy vấn, snapshot và ghi trùng đồng thời.
+4. Kiểm thử HTTP thật qua controller, handler và repository của ứng dụng.
+5. Chạy `clean verify`, kiểm tra kết quả và cập nhật tiến độ trước khi sang M2.
 
-Bước 1: đã hoàn thành — Nghĩa xác nhận các quyết định mục 3 ngày 2026-09-18.
-Bước 2: Bảo Long bàn giao PR hợp đồng: port, record command/query/DTO,
-ConflictException và bổ sung chữ ký cho JpaSeatRepositoryAdapter để code compile.
-Bước 3: sau khi PR hợp đồng ghép main, chia bốn nhánh theo bản giao việc.
-Các handler constructor được thống nhất ở mục 5; test/Web phụ thuộc handler
-chỉ hoàn thiện biên dịch khi implementation của Long đã sẵn sàng.
-Không ghép code gọi lớp chưa tồn tại hoặc để main không build được.
-Bước 4: ghép Domain/Application, adapter, test, cuối cùng cấu hình/Web.
-Bước 5: đã chạy toàn bộ verify, nghiệm thu và cập nhật tiến độ ngày 2026-09-18.
-
-Độc lập ở đây là không sở hữu trùng file, không phải không có phụ thuộc.
-Không tạo stub thành công giả hoặc dùng @Disabled để che phần chưa triển khai.
+Không cần phân công thành viên hoặc chờ review/ghép PR nội bộ.
+Không dùng stub thành công giả hoặc `@Disabled` để che phần M1 chưa triển khai.
+Ma trận kiểm chứng: [nghiệm thu M1](m1-acceptance.md).

@@ -1,6 +1,6 @@
 # Cinema
 
-Cinema được xây lại theo Clean Architecture. Đã hoàn thiện **M0 — nền kiến trúc**, gồm kiểm tra dữ liệu của `Money`, `BaseEntity` và kiểm thử nền tảng; các chức năng bán vé vẫn ở mức skeleton.
+Cinema là dự án cá nhân xây theo Clean Architecture. Đã hoàn thiện **M0 — nền kiến trúc** và **M1 — Cinema / Hall / Seat**; các chức năng bán vé thuộc những milestone tiếp theo.
 
 ## Kiến trúc và tài liệu
 
@@ -16,15 +16,15 @@ flowchart LR
 - [Lược đồ quan hệ](docs/relational-schema.md): ERD, bảng, khóa, constraint, chỉ mục và transaction.
 - [Kế hoạch Cinema V1](docs/cinema-v1-plan.md): kế hoạch đã thống nhất, phạm vi V1 và các nâng cấp Phase 2.
 - [Tiến độ Cinema V1](docs/cinema-v1-progress.md): checklist M0–M12, bước tiếp theo và nhật ký thực hiện.
-- [Phân công công việc](docs/team-work-allocation.md): phần việc của từng thành viên trong 18 mốc, điều kiện chuyển mốc và quy trình review/ghép vào main.
+- [Quy trình dự án cá nhân](docs/team-work-allocation.md): thứ tự triển khai và điều kiện hoàn thành từng milestone.
+- [Nghiệm thu M1](docs/m1-acceptance.md): phạm vi và ma trận kiểm chứng Cinema/Hall/Seat.
 
 ## Chạy và kiểm tra
 
-Đặc tả M1: [M1 — Cinema / Hall / Seat](docs/m1-specification.md),
-kèm bốn bản giao việc theo thành viên. M1 đã có luồng tạo và truy vấn
-rạp/phòng/ghế qua Application và HTTP.
+Đặc tả M1: [M1 — Cinema / Hall / Seat](docs/m1-specification.md).
+M1 đã có luồng tạo và truy vấn rạp/phòng/ghế qua Application và HTTP.
 
-Dùng JDK 25. Dự án đã có Maven Wrapper:
+Dùng JDK 17 theo `pom.xml`. Dự án đã có Maven Wrapper:
 
 ```powershell
 .\mvnw.cmd clean verify
